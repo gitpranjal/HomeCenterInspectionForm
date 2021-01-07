@@ -1006,7 +1006,7 @@ const InspectionForm = (props) => {
                             labelStyles={{color: "grey", fontSize: 12, fontWeight: "bold"}}
                         
                             inputStyles={{color: "grey", fontWeight: "bold"}}
-                            containerStyles={{...styles.input, width: Dimensions.get("window").width / 1.2, marginHorizontal: 5, marginBottom: 20,  height: 45,  backgroundColor: "white"}}
+                            containerStyles={{...styles.input, width: Dimensions.get("window").width / 1.2, marginHorizontal: 5,  height: 45,  backgroundColor: "white"}}
                             inputStyles={{fontWeight: "bold", fontSize: 14, color: Colors.primaryColor}}
                             editable={false}
                             keyboardType='numeric'
@@ -1026,7 +1026,7 @@ const InspectionForm = (props) => {
                                 <Text style={{color: Colors.inactiveColor, fontSize: 15, marginHorizontal: 10, marginTop: 10}}>Inspection Type</Text>
                                 <RadioButtonRN
                                     style={{width: "80%", marginHorizontal: 25, marginBottom: 15}}
-                                    textStyle={{marginHorizontal: 10, fontSize: 15, fontWeight: "bold", color: "grey"}}
+                                    textStyle={{marginHorizontal: 10, fontSize: 12, fontWeight: "bold", color: "grey"}}
                                     data={[
                                         {
                                         label: 'Part Inspection'
@@ -1092,13 +1092,13 @@ const InspectionForm = (props) => {
                 })()}
                         
                             
-                        <View id="inspectionParams" style={{borderWidth: 0, borderColor: Colors.primaryColor, marginTop: 20}}>
+                        <View id="inspectionParams" style={{borderWidth: 0, borderColor: Colors.primaryColor, marginTop: 10}}>
             {/* <View id="QuanityParams" style={{flexDirection: "row", alignSelf: "center", marginVertical: 20}}>
                     <Text style={{marginHorizontal: 10}}>PR Quantity {OrderQuantity}</Text>
                     <Text style={{marginHorizontal: 10}}>Done Quantity {SelectedOrderInfo.doneQty}</Text>
             </View> */}
 
-            <View id="PackedSampledSize" style={{flexDirection: "row", alignSelf: "center", marginBottom: 15}}>
+            <View id="PackedSampledSize" style={{flexDirection: "row", alignSelf: "center", marginBottom: 10}}>
                 
                     <FloatingLabelInput
                         // style={{...styles.input, width: Dimensions.get("window").width / 1.05}}
@@ -1154,7 +1154,7 @@ const InspectionForm = (props) => {
 
             
 
-                <View id="totalCartons" style={{flexDirection: "row", alignSelf: "center", marginBottom: 20}}>
+                <View id="totalCartons" style={{flexDirection: "row", alignSelf: "center", marginBottom: 10}}>
                     <FloatingLabelInput
                         // style={{...styles.input, width: Dimensions.get("window").width / 1.05}}
                         // placeholder="Factory representative person"
@@ -1249,7 +1249,7 @@ const InspectionForm = (props) => {
         </View>
 
                         <TouchableOpacity
-                            style={{ ...styles.openButton, backgroundColor: Colors.primaryColor, marginHorizontal: 10, width: "20%", marginBottom: 5}}
+                            style={{ ...styles.openButton, backgroundColor: Colors.primaryColor, marginHorizontal: 10, width: "20%", marginBottom: 5, height: 40}}
                             onPress={() => {
                                 var newProductInfoObject = {}
                                 newProductInfoObject["ProductCode"] = CurrentProduct
@@ -1434,7 +1434,7 @@ const InspectionForm = (props) => {
                                         <Text style={{marginLeft: "5%", fontSize: 10, fontWeight: "bold", color: "white"}}>Order Qty</Text>
                                         <Text style={{marginLeft: "5%", fontSize: 10, fontWeight: "bold", color: "white"}}>Offered Qty</Text>
                                         <Text style={{marginLeft: "5%", fontSize: 10, fontWeight: "bold", color: "white"}}>Sample Size</Text>
-                                        <Text style={{marginLeft: "3%", fontSize: 10, fontWeight: "bold", color: "white"}}>Excess Qty</Text>
+                                        {/*<Text style={{marginLeft: "3%", fontSize: 10, fontWeight: "bold", color: "white"}}>Excess Qty</Text>*/}
                             </View>)
                     })()}
                     <FlatList 
@@ -1445,10 +1445,10 @@ const InspectionForm = (props) => {
                         return (
                             <View style={{flexDirection: "row", alignContent: "center", alignItems: "center",  height: 35, borderWidth: 1, justifyContent: "flex-start", borderRadius: 5}}>
                                 <Text  numberOfLines={2} style={{marginLeft: "3%", fontSize: 10, fontWeight: "bold", color: "grey", textAlign: 'center', width: "25%"}}>{item.ProductCode}</Text>
-                                <Text style={{marginLeft: "7%", fontSize: 10, fontWeight: "bold", color: "grey"}}>{item.OrderQuantity}</Text>
-                                <Text style={{marginLeft: "15%", fontSize: 10, fontWeight: "bold", color: "grey"}}>{item.OfferedQuantity}</Text>
-                                <Text style={{marginLeft: "17%", fontSize: 10, fontWeight: "bold", color: "grey"}}>{item.SampleSize}</Text>
-                                <Text style={{marginLeft: "17%", fontSize: 10, fontWeight: "bold", color: "grey"}}>{item.ExcessQuantity}</Text>
+                                <Text style={{marginLeft: "10%", fontSize: 10, fontWeight: "bold", color: "grey"}}>{item.OrderQuantity}</Text>
+                                <Text style={{marginLeft: "20%", fontSize: 10, fontWeight: "bold", color: "grey"}}>{item.OfferedQuantity}</Text>
+                                <Text style={{marginLeft: "20%", fontSize: 10, fontWeight: "bold", color: "grey"}}>{item.SampleSize}</Text>
+                                {/*<Text style={{marginLeft: "17%", fontSize: 10, fontWeight: "bold", color: "grey"}}>{item.ExcessQuantity}</Text>*/}
                                 
                                
                             </View>
@@ -1504,7 +1504,7 @@ const InspectionForm = (props) => {
                             return (<View style={{flexDirection: "row", height: 35, backgroundColor: Colors.primaryColor, justifyContent: "flex-start", alignItems: "center", borderRadius: 5,}}>
                                         <Text numberOfLines={2} style={{marginLeft: "7%", fontSize: 10, fontWeight: "bold", color: "white"}}>Product Code</Text>
                                         <Text numberOfLines={2} style={{marginLeft: "5%", fontSize: 10, fontWeight: "bold", color: "white"}}>{CheckType}</Text>
-                                        <Text numberOfLines={2} style={{marginLeft: "15%", fontSize: 10, fontWeight: "bold", color: "white"}}>Result</Text>
+                                        <Text numberOfLines={2} style={{fontSize: 10, fontWeight: "bold", color: "white", position: "absolute", right: 70}}>Result</Text>
                                         
                             </View>)
                     })()}
@@ -1560,7 +1560,7 @@ const InspectionForm = (props) => {
                                     buttonColor={Colors.primaryColor}
                                     borderColor={Colors.primaryColor}
                                     hasPadding
-                                    style={{width: 85, position: "absolute", right: 70}}
+                                    style={{width: 85, position: "absolute", right: 50}}
                                     height={25}
                                     textStyle={{fontSize:10, fontWeight: "bold"}}
                                     selectedTextStyle={{fontSize:10, fontWeight: "bold"}}
@@ -2499,12 +2499,12 @@ const styles = StyleSheet.create({
 
           modalScrollView: {
             marginHorizontal: 20,
-            marginTop: 60,
+            marginTop: 40,
             backgroundColor: "white",
             borderRadius: 10,
             borderColor: "#00008b",
             // padding: 35,
-            paddingVertical: 50,
+            paddingVertical: 20,
             // alignItems: "center",
             shadowColor: "#000",
     
