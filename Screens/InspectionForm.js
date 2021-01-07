@@ -877,7 +877,19 @@ const InspectionForm = (props) => {
                     transparent={true}
                     // visible={ShowMessageModal} 
                     visible = {ProductInputModalVisible}
-                    onRequestClose={() => {SetProductInputModalVisible(false)}}
+                    onRequestClose={() => {
+                        SetCurrentProduct("")
+                        SetOfferedQuantity("")
+                        // SetOrderQuantity("")
+                        SetSampleSize("")
+                        SetExcessQuantity("")
+                        SetIsPartInspection("undecided")
+                        SetPackedQuantity("")
+                        SetTotalCartons("")
+                        SetCartonSampleSize("")
+                        SetCartonSelected("")
+                        SetProductInputModalVisible(false)
+                    }}
                 >
                     <ScrollView 
                     
@@ -1307,7 +1319,7 @@ const InspectionForm = (props) => {
                             }}
                             disabled={SelectedOrderInfo.inspectionID != 0}
                         >
-                          <Text style={{...styles.textStyle, color: Colors.accentColor}}>Add</Text>
+                          <Text style={{...styles.textStyle, color: Colors.accentColor, fontSize: 15}}>Add</Text>
                         </TouchableOpacity>
 
 
@@ -1431,9 +1443,9 @@ const InspectionForm = (props) => {
                         if(ProductCodeInfoList.length != 0)
                             return (<View style={{flexDirection: "row", height: 35, backgroundColor: Colors.primaryColor, justifyContent: "flex-start", alignItems: "center", borderRadius: 5,}}>
                                         <Text style={{marginLeft: "7%", fontSize: 10, fontWeight: "bold", color: "white"}}>Product Code</Text>
-                                        <Text style={{marginLeft: "5%", fontSize: 10, fontWeight: "bold", color: "white"}}>Order Qty</Text>
-                                        <Text style={{marginLeft: "5%", fontSize: 10, fontWeight: "bold", color: "white"}}>Offered Qty</Text>
-                                        <Text style={{marginLeft: "5%", fontSize: 10, fontWeight: "bold", color: "white"}}>Sample Size</Text>
+                                        <Text style={{marginLeft: "10%", fontSize: 10, fontWeight: "bold", color: "white"}}>Order Qty</Text>
+                                        <Text style={{marginLeft: "7%", fontSize: 10, fontWeight: "bold", color: "white"}}>Offered Qty</Text>
+                                        <Text style={{marginLeft: "7%", fontSize: 10, fontWeight: "bold", color: "white"}}>Sample Size</Text>
                                         {/*<Text style={{marginLeft: "3%", fontSize: 10, fontWeight: "bold", color: "white"}}>Excess Qty</Text>*/}
                             </View>)
                     })()}
@@ -1443,15 +1455,30 @@ const InspectionForm = (props) => {
                         style={{}}
                         renderItem = {({item}) => {
                         return (
-                            <View style={{flexDirection: "row", alignContent: "center", alignItems: "center",  height: 35, borderWidth: 1, justifyContent: "flex-start", borderRadius: 5}}>
+                            <TouchableOpacity
+                            style={{flexDirection: "row", alignContent: "center", alignItems: "center",  height: 35, borderWidth: 1, justifyContent: "flex-start", borderRadius: 5}}
+                            onPress={() => {
+                                SetCurrentProduct(item.ProductCode)
+                                SetOfferedQuantity(item.OfferedQuantity)
+                                // SetOrderQuantity("")
+                                SetSampleSize(item.SampleSize)
+                                SetExcessQuantity(item.ExcessQuantity)
+                                SetIsPartInspection(item.IsPartInspection)
+                                SetPackedQuantity(item.PackedQuantity)
+                                SetTotalCartons(item.TotalCartons)
+                                SetCartonSampleSize(item.CartonSampleSize)
+                                SetCartonSelected(item.CartonSelected)
+                                
+
+                                SetProductInputModalVisible(true)
+                            }}
+                            >
                                 <Text  numberOfLines={2} style={{marginLeft: "3%", fontSize: 10, fontWeight: "bold", color: "grey", textAlign: 'center', width: "25%"}}>{item.ProductCode}</Text>
                                 <Text style={{marginLeft: "10%", fontSize: 10, fontWeight: "bold", color: "grey"}}>{item.OrderQuantity}</Text>
                                 <Text style={{marginLeft: "20%", fontSize: 10, fontWeight: "bold", color: "grey"}}>{item.OfferedQuantity}</Text>
                                 <Text style={{marginLeft: "20%", fontSize: 10, fontWeight: "bold", color: "grey"}}>{item.SampleSize}</Text>
-                                {/*<Text style={{marginLeft: "17%", fontSize: 10, fontWeight: "bold", color: "grey"}}>{item.ExcessQuantity}</Text>*/}
-                                
-                               
-                            </View>
+                            </TouchableOpacity>
+                            
                         )}}
 
                     />
@@ -1489,7 +1516,11 @@ const InspectionForm = (props) => {
                 />
 
 {/* ####################################################################################################################################################### */}
-                <FlatList
+
+                {(() => {
+                    if(ProductCodeInfoList.length != 0)
+                        return(
+                            <FlatList
                 data={["Functionality Checks", "Special Features", "Visual Checks", "Stability Checks", "Onsite Checks"]}
                 keyExtractor={(CheckType) => CheckType}
                 style={{}}
@@ -1498,16 +1529,14 @@ const InspectionForm = (props) => {
                     return (
 
                     <View id ="Checklist Table" style={{marginVertical: 10, width: "99%", marginLeft: "1%"}}>
+                        
                     <Text style={{fontWeight: "bold", fontSize: 15, color:"grey", marginBottom: 5}}>{CheckType.toUpperCase()}</Text>
-                    {(() => {
-                        if(ProductCodeInfoList.length != 0)
-                            return (<View style={{flexDirection: "row", height: 35, backgroundColor: Colors.primaryColor, justifyContent: "flex-start", alignItems: "center", borderRadius: 5,}}>
+                    <View style={{flexDirection: "row", height: 35, backgroundColor: Colors.primaryColor, justifyContent: "flex-start", alignItems: "center", borderRadius: 5,}}>
                                         <Text numberOfLines={2} style={{marginLeft: "7%", fontSize: 10, fontWeight: "bold", color: "white"}}>Product Code</Text>
                                         <Text numberOfLines={2} style={{marginLeft: "5%", fontSize: 10, fontWeight: "bold", color: "white"}}>{CheckType}</Text>
                                         <Text numberOfLines={2} style={{fontSize: 10, fontWeight: "bold", color: "white", position: "absolute", right: 70}}>Result</Text>
                                         
-                            </View>)
-                    })()}
+                    </View>
                     <FlatList 
                         data={(() => {
                             var rowList = []
@@ -1595,6 +1624,9 @@ const InspectionForm = (props) => {
                 
                 
                 />
+                        )
+                })()}
+                
 {/* #########################################################################################################################################################                */}
 
         <View id="defectsInfo">
